@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-4 shadow-sm">
+                <div class="card-body">
+                    <p class="card-text">{{ task.description }}</p>
+                    <p class="text-muted"><strong>Created:</strong> {{ task.created }}</p>
+
+                    <div class="text-center mt-3">
+                        <a href="{% url 'home' %}" class="btn btn-secondary">Go back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

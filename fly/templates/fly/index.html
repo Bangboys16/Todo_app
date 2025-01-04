@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<style>
+   .task-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.task-item {
+    background-color: #ffffff;
+    border-left: 4px solid #007bff;
+    padding: 15px;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.task-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-name {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.task-actions a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.btn {
+    padding: 6px 12px;
+    font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+    .btn {
+        font-size: 0.8rem;
+        padding: 5px 10px;
+    }
+
+    .task-item {
+        padding: 10px;
+    }
+
+    .task-name {
+        font-size: 1rem;
+    }
+}
+
+</style>
+
+<div class="row justify-content-center my-4">
+    <div class="col-12 text-center">
+        <a class="btn btn-primary btn-lg d-flex justify-content-center align-items-center" href="{% url 'create_task' %}">
+            <i class="fas fa-tasks me-2"></i> Create Task
+        </a>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8">
+        <ul class="task-list">
+            {% for task in task %}
+            <li class="task-item mb-3 p-3 rounded shadow-sm">
+                <div class="task-header d-flex justify-content-between align-items-center">
+                    <span class="task-name">{{ task.name }}</span>
+                    <span class="task-actions d-flex">
+                        <a class="btn btn-info btn-sm d-flex align-items-center me-2" href="{% url 'task_detail' task.id %}">
+                            <i class="fas fa-info-circle me-2"></i> Detail
+                        </a>
+                        <a class="btn btn-warning btn-sm d-flex align-items-center me-2" href="{% url 'task_update' task.id %}">
+                            <i class="fas fa-edit me-2"></i> Update
+                        </a>
+                        <a class="btn btn-danger btn-sm d-flex align-items-center" href="{% url 'task_delete' task.id %}">
+                            <i class="fas fa-trash-alt me-2"></i> Delete
+                        </a>
+                    </span>
+                </div>
+                <div class="task-meta text-muted mt-2">
+                    <small>Created: {{ task.created }}</small>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
